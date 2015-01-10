@@ -1,6 +1,6 @@
 #Online Old Books Ads Portal
 
-This is my first website in Python-Flask having single py file
+This is my first website in Python-Flask (and sqlite) having single py file
 
 Here you can 
 
