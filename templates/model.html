@@ -1,0 +1,288 @@
+<!doctype html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<!--<link rel="shortcut icon" href="/static/b.ico">-->
+<meta name="verification" content="93f02000a5e0bbf63ff4febce824eaea" />
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
+<!--<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />-->
+<!--<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/login.css')}}">-->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/custom.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/ui-lightness/jquery-ui-1.10.4.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/jquery.inputfile.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='font-awesome/css/font-awesome.min.css')}}" >
+<script type=text/javascript>
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+</head>
+<body id="page-top">
+{% block nav %}
+<div class="navbar navbar-inverse navbar-fixed-top free_nav" >
+
+  <div class="container">
+   <div class="navbar-header page-scroll">
+     <a class="navbar-brand active logo" href="/" ><b>OldBooks</b></a>
+       <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+       </button>
+     </div>
+       <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right fsize">
+                <li ><a href="/">
+                <div style="color:">
+                     <span class="glyphicon glyphicon-home"></span>
+                </div>
+                </a></li>
+                 <li><a href="{{url_for('searchbox')}}"><b>SearchBooks</b></a></li>
+                 <li><a href="{{url_for('paper')}}">Papers</a></li>
+				                <!--<li class="dropdown">
+				                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social<b class="caret"></b></a>
+				                  <ul class="dropdown-menu">
+				                    <li><a href="#">Facebook</a></li>
+				                    <li><a href="#">Google+</a></li>
+				                    <li><a href="#">Orkut</a></li>
+				                  </ul>
+				                </li>
+                 <li ><a href="/examalert/">Entrance Alert</a></li>-->
+               {% if g.user %}
+                <li><a href="{{url_for('profile')}}"><b>Profile</b></a></li>
+                <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{url_for('confirmation',v='set password',m=g.user.username)}}" class="pull-right"><b>change password</b></a></li>
+                            <li><a href="{{url_for('logout')}}"><b>Logout </b></a></li>
+                          </ul>
+                        </li>
+                 <!--<li><button class="btn btn-warning btn-lg pull-right" style="margin-top:3px"><a href="#myupload" role="button"  data-toggle="modal" id='upid'>Submit Ads</a></button></li>-->
+                {% else %}
+                <li><a href="#mylogin" role="button"  data-toggle="modal">Login</a></li>
+                <li><a href="#mysignup" role="button" data-toggle="modal">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+  </div>
+</div>
+{% endblock %}
+<div id="dialog"></div>
+<div class="modal fade" id="mylogin" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog"style="max-width:400px;">
+      <div class="modal-content"style="background-color:rgb(207, 209, 213);">
+        <div class="modal-header">
+            <div class="form-group">
+                  <input type="text" id="log1"class="form-control input-lg" placeholder="Username" autofocus required>
+               <center><span id="log1s"></span></center>
+            </div>
+
+            <div class="form-group">
+                  <input type="password" id="log2"class="form-control input-lg" placeholder="Password">
+               <center><span id="log2s"></span></center>
+            </div>
+
+            <div class="form-group">
+              <button id="log3"class="btn btn-warning btn-lg btn-block"><b>Login</b></button>
+              <center><span id="log3s"></span></center><br>
+
+              <span class="pull-left"><a href="{{url_for('confirmation',v='verify user')}}"><b><span class="label label-danger">Forget your password ?</span></b></a></span>
+
+              <span class="pull-right"><a href="#mysignup" data-dismiss="modal" data-toggle="modal"><b>Not Registered?<span class="label label-success"> Sign up</span>
+              </b></a></span><span></span>
+            </div>
+            <br>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--end of login form modal-->
+
+<!--signup form modal-->
+<div class="modal fade" id="mysignup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h2 class="text-center "><b>Sign up</b></h2>
+        </div>
+        <div class="modal-body">
+          <!--<form class="form col-md-12 center-block">-->
+
+      <div class="form-group">
+      <!--  <div class="input-group input-group-lg">-->
+                  <!--<span class="input-group-addon"><b>Username</b></span>-->
+                <input type="text" id="ur"class="form-control input-lg" placeholder="Username" autofocus required>
+               <!--</div>-->
+               <center><span id="sur"></span></center>
+            </div>
+
+            <div class="form-group">
+              <!--<div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b>Fullname</b></span>-->
+                  <input type="text" id="nm"class="form-control input-lg" placeholder="Full name">
+               <!-- </div>-->
+               <center><span id="snm"></span></center>
+            </div>
+
+            <div class="form-group">
+                <!--<div class="input-group input-group-lg">-->
+                  <!--<span class="input-group-addon"><b>Email  </b></span>-->
+                  <input type="text" id="eid"class="form-control input-lg" placeholder="Email">
+                <!--</div>-->
+               <center><span id="semail"></span></center>
+            </div>
+
+            <div class="form-group">
+             <!-- <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b>Password</b></span>-->
+                  <input type="password" id="p1"class="form-control input-lg" placeholder="Password">
+                <!--</div>-->
+               <center><span id="spassword1"></span></center>
+            </div>
+
+            <div class="form-group">
+              <!--<div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b>Password</b></span>-->
+                  <input type="password" id="p2"class="form-control input-lg" placeholder="Confirm Password">
+               <!-- </div>-->
+               <center><span id="spassword2"></span></center>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+               <input type="checkbox" id="scheck"><span><b> &nbsp;&nbsp;&nbsp;I accept <a href="/terms/">Terms and conditions</a> and <a href="/privacypolicy/">Privacy policy</a>.</b><center><span id="sscheck"></span></center><br></span>
+               </div>
+
+            </div>
+            <div class="form-group">
+              <button id="sub"class="btn btn-primary btn-lg btn-block">Sign Up</button>
+              <b><span class="pull-right">Already have an account?<a href="#mylogin"  data-dismiss="modal" data-toggle="modal" >Log in here </a></span><span></span></b>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-12">
+          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		  </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<!--end of signup form modal-->
+
+
+<!-- start of feedback form-->
+<div class="modal fade" id="fedbk" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h2 class="text-center ">Feedback,Suggestions or Error</h2>
+        </div>
+        <div class="modal-body">
+          <!--<form class="form col-md-12 center-block">-->
+            <div class="form-group">
+                 <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b>Name</b></span>
+                  <input type="text" id="fed1"class="form-control input-lg" placeholder="Name">
+                </div>
+               <center><span id="fed1s"></span></center>
+            </div>
+
+            <div class="form-group">
+               <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b>Email</b></span>
+                  <input type="email" id="fed2"class="form-control input-lg" placeholder="Email id">
+                </div>
+               <center><span id="fed2s"></span></center>
+            </div>
+            <div class="form-group">
+            <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b> Text </b></span>
+                <textarea type="text" id="fed3" class="form-control input-lg" placeholder="Type your text...."></textarea>
+                </div>
+               <center><span id="fed3s"></span></center>
+            </div>
+            <div class="form-group">
+              <button id="fed4"class="btn btn-primary btn-lg btn-block">Submit</button>
+              <center><span id="fed4s"></span></center><br>
+               <center><span id='sugfed'></span></center>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-12">
+          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<!-- end of feedback form-->
+<!-- begin olark code -->
+<!-- end olark code -->
+{% block body %}{% endblock %}
+ <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+  </div>
+  {%block footer%}
+  <footer class="text-center" style="font-family:Times">
+        <div class="footer-above">
+        <div class="container">
+                <div class="row">
+                <h4><a href="#" class="lin_col">About Us</a> | <a href="/contact/" class="lin_col">Contact</a> | <a href="/terms/" class="lin_col">Terms of Use</a> | <a href="/privacypolicy/" class="lin_col">Privacy Policy</a> | <a href="/faq/" class="lin_col"s>FAQ</a> | <a href="#fedbk" role="button" data-toggle="modal" class="lin_col">Report error</a></h4>
+                </div>
+                <div class="row">
+                        <ul class="list-inline">
+                            <li><a href="https://www.facebook.com/oldbooksjmi/"  class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <!--<li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+
+                    </div>
+                    --></ul>
+                </div>
+            </div>
+          </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; 2014 - Mehrab
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+</div>
+<a href="#fedbk" role="button" data-toggle="modal">
+    <div id="bot">
+    <span class="glyphicon glyphicon-question-sign pull-right" style="color:white"></span>
+    </div>
+</a>
+<!--javascripts-->
+<script  src="{{url_for('static',filename='javascript/jquery.js')}}"></script>
+<script  src="{{url_for('static',filename='javascript/jquery-ui-1.10.4.min.js')}}"></script>
+<script src="{{url_for('static',filename='javascript/bootstrap.js')}}"></script>-->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+<script src="{{url_for('static',filename='javascript/ownstuff.js')}}"></script>
+<!--<script src="{{url_for('static',filename='javascript/jquery.inputfile.js')}}"></script>-->
+</body>
+
+</html>
+

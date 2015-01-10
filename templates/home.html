@@ -1,0 +1,120 @@
+{% extends "model.html" %}
+{% block title %}Oldbooks{% endblock %}
+{% block mean %}{{ super()}}{% endblock %}
+{% block body %}
+
+<!--<center>
+    <h1 >Login</h1>
+    <div >
+     <input  type="text" id="log1" class="input-lg" placeholder="Username" name="username" id="username"></input><br/>
+     <span id="log1s"></span><br>
+     <input type="password" id="log2" class="input-lg" name="password" placeholder="Password"></input><br />
+     <span id="log2s"></span><br>
+    </div>
+     <input type="submit" value="Submit" id="log3"></input><br>
+     <span id="log3s"></span>
+   </div>
+</center>-->
+    <div class="showcase1" style="margin-top:15px">
+
+    <div class="row ">
+    <div class="col-md-2 col-sm-2 col-xs-5">
+    <img style="margin-top:0px;margin-left:0px;;" id="img_id" src="/static/books.png" alt="picture"class="img-responsive  pull-left">
+    </div>
+    <div class="col-md-offset-7 col-sm-offset-6 col-md-3 col-sm-4 col-xs-6 col-xs-offset-1">
+    {% if g.user %}
+      <div style="margin-right:10px"><a href="{{url_for('profile')}}" role="button"  data-toggle="modal"> <button class="post-btn pull-right"id="" ><h3><b>
+      Post Ads </b></h3><span class="free-flag"></span></button></a></div>
+    {% else %}
+    <div style="margin-right:10px"><a href="#mylogin" role="button"  data-toggle="modal"> <button class="post-btn pull-right"id="" ><h3><b>
+    Post Ads <small>login</small> </b></h3><span class="free-flag"></span></button></a></div>
+    {% endif %}
+    </div>
+    </div>
+
+   <div class="row">
+      <div class="col-lg-3 visible-xs">
+      <br>
+        <h1 class=" any"><strong><b><center>Welcome to <span style="color:red">Free Books</span> Ads Portal for JMI</center></b></strong><br><br></h1>
+        <h3 style="color:rgb(255, 235, 0)"><span class="recet1"><center>Post Free Ads & Search Free Ads</center></span><br><br></h3>
+      </div>
+      <div class="col-lg-6 col-md-6 col-lg-offset-3 col-sm-7 col-md-offset-3 col-sm-offset-1  hidden-xs">
+       <br>
+        <h1 class=" any"><strong> <center><b>Welcome to  &nbsp;<span style="color:red">Free Books</span>&nbsp;Ads Portal for JMI</span> </b></center></strong><br></h1>
+         <h3 style="color:rgb(255, 235, 0)"><span class="recet1"><center>Post Free Ads & Search Free Ads</center></span><br></h3>
+      </div><br>
+      <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <center><h3 class="panel-title"style="color:green">Follow us on Facebook</h3></center>
+        </div>
+        <center>
+        <div class="panel-body">
+    <div class="fb-like-box" data-href="https://www.facebook.com/oldbooksjmi" data-width="250" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+          <center>
+           <ul class="list-inline">
+                            <li><a href="http://facebook.com/oldbooksjmi/" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <!--li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <!--<li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+
+                    </div>
+            --></ul>
+            </center>
+        </div>
+    </div>
+    </div>
+  </div>
+  </div>
+    <div class="row" id="footerplace">
+    <div id="here"><br><br><span style="color:red;font-size:1.5em;margin-left:120px;"><b>Please Search book(s) before suggest about books</b></span></div>
+    <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 ">
+                <span class="f_wt"><h2><b>Comments</b> </h2></span>
+                <br>
+                  <div class="form-group">
+                    <label for="name1"><b>Your Name</b></label>
+                    <input type="name" name="Name" class="form-control input-lg" id="com_name" placeholder="Your Name">
+                    <center><span id="com_name_s"></span></center>
+                  </div>
+                  <div class="form-group">
+                    <label for="email1"><b>Email address</b></label>
+                    <input type="email" name="Mail" class="form-control input-lg" id="com_email" placeholder="Enter email">
+                    <center><span id="com_email_s"></span></center>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Your Text</b></label>
+                    <textarea class="form-control input-lg" name="Message" rows="3" id="com_text" placeholder="Type Your text..."></textarea>
+                  </div>
+                  <center><span id="com_text_s"></span></center>
+                  <br>
+                  <button type="submit" class="com_btn pull-right" id="com_hit"><b>SUBMIT</b></button>
+                  <br><br>
+                  <center><span id="com_btn_s"></span></center>
+                  <br><br>
+                  <div class="fb-comments" data-href="http://oldbooks.pythonanywhere.com" data-numposts="5" data-colorscheme="light"></div>
+    </div>
+    <br><br><br>
+    <div class="col-lg-5  col-md-5  col-sm-5 ">
+    <br><br>
+    {% if record %}
+    {% for i in record %}
+    <span class="ev_od">
+    <span class="list-group-item ">
+    <span class="label label-danger"style="font-size:1em">{{i.name}}</span><br>
+    <span class="input-lg">{{i.text}}</span>
+    </span>
+    </span>
+    {% endfor %}
+    {% endif %}
+    <br>
+    <a href="/comments/1/"class=""><button type="submit" class="com_btn pull-right" id="com_hit"><b>More</b><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span></button></a>
+    </div>
+    </div>
+
+{% endblock %}

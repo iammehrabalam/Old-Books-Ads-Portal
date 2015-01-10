@@ -1,0 +1,51 @@
+{% extends "model.html" %}
+{% block title %}Contact detail{% endblock %}
+{% block body %}
+<div class="row">
+<div class="thumbnail 	col-lg-4 col-xs-8 col-sm-4 col-md-3 col-md-offset-1 col-xs-offset-2" id="prodetail">
+   <img  data-src="holder.js/50%x180"class="img-responsive" src="/static/uploads/{{record.pic_name}}" alt="">
+   <div class="caption">
+        <h4 class="pull-right" style="color:red"><span class="label label-info ">Type</span> : <b>{{record.type}}</b></h4><br>
+        <h3 style="color:green"><span class="label label-default">Title</span> : <b><span id="s_m_s_n">{{record.title}}</span></b></h3>
+        <h4><span class="label label-danger">Author</span> : <b><span id="s_m_s_a">{{record.author}}</span></b></h4>
+        <h4><span class="label label-warning">Publisher</span> : <b>{{record.pub}}</b></h4>
+       	 <h3 style="color:red" class="pull-right">Cost : <i class="fa fa-inr"></i> <b>{{record.cost}}</b></h3>
+    </div>
+</div>
+<div class="col-xs-offset-1 col-lg-4 col-xs-10 col-md-5 col-sm-7">
+<div class="panel panel-primary"  id="prodetail">
+  		<div class="panel-heading">
+    		<h3 ><center><strong>Contact detail</strong></center></h3><!--class="panel-title "-->
+  		</div>
+  		<div class="panel-body">
+		    <p><b><h4><span class="label label-warning">Name</span> : {{info.name}}</h4></b></p>
+		    <p><b><h4><span class="label label-success">Email id</span> : <span id='s_m_s'>{{info.email}}</span></h4></b></p>
+		    <p><b><h4><span class="label label-warning">Phone</span> : {{record.mobile}}</h4></b></p>
+		    <p><b><h4><span class="label label-info">Description</span> :<br><br><small> {{record.description}}</small></h4></b></p>
+		    <a href="#s_m_l" role="button"  data-toggle="modal" class="btn btn-default pull-right"><span style="color:red"><b>Send mail</b></span></a>
+		</div>
+</div>
+
+</div>
+</div>
+<div class="modal fade" id="s_m_l" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog"style="max-width:400px;">
+      <div class="modal-content"style="background-color:rgb(202, 204, 196);">
+        <div class="modal-header">
+        <div class="modal-body">
+          <!--<form class="form col-md-12 center-block">-->
+            <div class="form-group">
+                <textarea rows="3" cols="20" id="s_m_l_1" class="form-control input-lg" placeholder="Type your message...."></textarea>
+               <center><span id="s_m_l_1s"></span></center>
+            </div>
+            <div class="form-group">
+              <button id="s_m_l_2"class="btn btn-primary btn-lg btn-block">Send </button>
+              <center><span id="s_m_l_2s"></span></center><br>
+               <center><span id=''></span></center>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

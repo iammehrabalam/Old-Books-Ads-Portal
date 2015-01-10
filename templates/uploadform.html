@@ -1,0 +1,123 @@
+{% extends "model.html" %}
+{% block title %}Posting Ads{% endblock %}
+{% block body %}
+<div class="container">
+{% if error %}
+<div class="alert alert-danger" id="prorecord"><center><strong>{{ error }}</strong></center></div>
+{% endif %}
+{% if succe %}
+<div class="alert alert-success" id="prorecord"><center><strong>{{ succe }}</strong></center></div>
+{% endif %}
+<form action="{{url_for('uploaddata')}}" method="post" enctype="multipart/form-data" id="prorecord" class="left_m">
+    <h1 >Ads Info</h1>
+    	<div class="row">
+    		<div class="col-md-4">
+    			<div class="input-group ">
+                <span class="input-group-addon"><b>Title</b></span>
+			   	<input type="text" name="nuppp1" id="uppp1"class="form-control " placeholder="Book Title (min: 10 char)" autofocus required autocomplete="off">
+			   	</div>
+		    </div>
+		    <div class="col-md-4">
+			    <center><span id="uppp1s"></span></center>
+		    </div>
+		</div>
+		<br>
+		<div class="row">
+		    <div class="col-md-4 ">
+		    	<div class="input-group ">
+                <span class="input-group-addon"><b>Author</b></span>
+			   <input type="text" name="nuppp2" id="uppp2"class="form-control" placeholder="Author name"autofocus required autocomplete="off">
+			   </div>
+			</div>
+		    <div class="col-md-4 ">
+			    <center><span id="uppp2s"></span></center>
+		    </div>
+		 </div>
+		 <br>
+		 <div class="row">
+		    <div class="col-md-4 ">
+		    	<div class="input-group ">
+                <span class="input-group-addon"><b>Publisher</b></span>
+			   <input type="text" name="nuppp21" id="uppp21"class="form-control " placeholder="Publisher" autocomplete="off">
+			   </div>
+			</div>
+		    <div class="col-md-4 ">
+			    <center><span id="uppp21s"></span></center>
+		    </div>
+		 </div>
+		 <br>
+	   <div class="row">
+		    <div class="col-md-4 ">
+		       <div class="input-group ">
+                <span class="input-group-addon"><b>Price</b></span>
+			   <input type="number" name="nuppp3" id='uppp3'  class="form-control " placeholder="Price in which u sell or rent"autocomplete="off">
+			   </div>
+		    </div>
+		    <div class="col-md-4 ">
+			 <center><span id="uppp3s"></span></center>
+		    </div>
+	    </div>
+	    <br>
+	    <div class="row">
+    		<div class="col-md-4">
+    		<div class="input-group ">
+                <span class="input-group-addon"><b>Type</b></span>
+			<select data-placeholder=""name="nuppp4" id="uppp4" class="form-control  chzn-done" >
+				<option value="sell">Sell</option>
+				<option value="rent">Rent&nbsp;</option>
+			</select>
+			</div>
+		    </div>
+		    <div class="col-md-4 ">
+			     <center><span id="uppp4s"></span></center>
+		    </div>
+		</div>
+		<br>
+		<div class="row">
+    		<div class="col-md-4">
+    		<div class="input-group ">
+                <span class="input-group-addon"><b>Location</b></span>
+			<select data-placeholder=""name="nuppp41" id="uppp41" class="form-control  chzn-done" >
+				<!--option value="darbhanga">Darbhanga</option-->
+ 				<option value="jmi">JMI&nbsp;</option>
+			</select>
+			</div>
+		    </div>
+		    <div class="col-md-4 ">
+			     <center><span id="uppp41s"></span></center>
+		    </div>
+		</div>
+		<br>
+		<div class="row">
+		    <div class="col-md-4 ">
+		       <div class="input-group ">
+                <span class="input-group-addon"><b>Contact</b></span>
+			   <input type="tel" name="nuppp5" id='uppp5' size="10" class="form-control " placeholder="Contact Number" autocomplete="off">
+			   </div>
+		    </div>
+		    <div class="col-md-4 ">
+			 <center><span id="uppp5s"></span></center>
+		    </div>
+	    </div>
+	    <br>
+		<div class="row">
+		    <div class="col-md-4 ">
+		    	<div class="input-group ">
+                <span class="input-group-addon"><b>Description</b></span>
+			   <textarea rows="3" cols="20" id='uppp6' class="form-control " name="nuppp6" placeholder="Description (Optional)"></textarea>
+			   </div>
+		    </div>
+		    <div class="col-md-4 "><br><br>
+			   <center><span id="uppp6s"></span></center>
+		    </div>
+	    </div><br>
+	    <span style="color:red"><b>Allowed extensions ['png','jpg','jpeg','gif','tif']</b></span><br>
+	    <input type="file" id="fill" name="file" ><br>
+	     <!--<input type="checkbox" id="uppp7"><span><b> &nbsp;&nbsp;&nbsp;I accept <a href="/terms/">Terms and conditions</a> and <a href="/privacypolicy/">Privacy policy</a>.</b></span><br><br>-->
+	     <button id="upppbtn"  disabled="disabled" class="btn btn-primary ">Upload&nbsp;&nbsp;<span class="glyphicon glyphicon-upload"></span></button>
+        <!--<input type="submit" id="upppbtn"  disabled="disabled" class="btn btn-primary " value="upload">-->
+             <br><br>
+        </form>
+</div>
+
+{% endblock %}

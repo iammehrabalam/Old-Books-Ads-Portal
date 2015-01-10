@@ -1,0 +1,199 @@
+{% extends "model.html" %}
+{% block body %}
+<div id="prorecord">
+<div class="row">
+<div class="col-lg-2 free" style="font-size:2em">
+<a href="{{url_for('a_not_4u',tab='p')}}" class="label label-danger"><b>Posts</b>&nbsp;<span class="badge">{{po_c}}</span></a><br><br>
+<a href="{{url_for('a_not_4u',tab='c')}}"class="label label-danger"><b>comments</b>&nbsp;<span class="badge">{{c_c}}</span></a><br><br>
+<a href="{{url_for('a_not_4u',tab='u')}}"class="label label-danger"><b>users</b>&nbsp;<span class="badge">{{u_c}}</span></a><br><br>
+<a href="{{url_for('a_not_4u',tab='v')}}"class="label label-danger"><b>Visits</b>&nbsp;<span class="badge">{{v_c}}</span></a><br><br>
+<a href="{{url_for('a_not_4u',tab='pro')}}"class="label label-danger"><b>profile</b>&nbsp;<span class="badge">{{pro_c}}</span></a><br><br>
+<a href="{{url_for('a_not_4u',tab='f')}}"class="label label-danger"><b>feedback</b>&nbsp;<span class="badge">{{f_c}}</span></a><br><br>
+<a href="#user_m_l" class="label label-danger"role="button"  data-toggle="modal">Send Mail</a>
+</div>
+{% if p_record %}
+    <div class="col-lg-7 col-lg-offset-1">
+    {% for i in p_record %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+    <div class="media">
+      <span class="pull-left">
+        <img class="img-responsive hgtimg_p"src="/static/uploads/{{i.pic_name}}" alt="...">
+      </span>
+      <div class="media-body">
+        <h4 class="media-heading" style="color:green">{{i.title}}<span class="pull-right label label-default"><b>{{i.datetime}}</b></span><br></h4>
+        <b><span style="color:blue">Author</span>:&nbsp;{{i.author}}</b> ,&nbsp;<b><span style="color:blue">publisher</span>:&nbsp;{{i.pub}}</b><br>
+        <b><span style="color:blue">user</span>:&nbsp;{{i.username}}</b>,&nbsp;<b><span style="color:blue">Mobile</span>:&nbsp;{{i.mobile}}</b><br>
+        <b><span style="color:blue">cost</span>:&nbsp;{{i.cost}}</b>,&nbsp; <b><span style="color:blue">type</span>:&nbsp;{{i.type}}</b><br>
+        <b><span style="color:blue">description</span>:&nbsp;{{i.description}}</b><br>
+        <a href="{{url_for('delt',id=i.post_id)}}"class="btn btn-danger pull-right c_f_conf3" id="c_f_conf1">Delete</a>
+        {% if i.status== 0 %}
+        <a href="{{url_for('sold',id=i.post_id)}}"class="btn btn-success pull-left c_f_conf3" id="c_f_conf1">Sold</a>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+    <ul class="pager">
+    {% if page > 1 %}
+      <li><a href="{{url_for('a_not_4u',tab='p',page=page-1)}}">Previous</a></li>
+    {% endif %}
+    {% if MAX_PAGE > page %}
+      <li><a href="{{url_for('a_not_4u',tab='p',page=page+1)}}">Next</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% endif %}
+{% if pro_record %}
+    <div class="col-lg-8 col-lg-offset-1">
+    {% for i in pro_record %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <b><span style="color:blue">user</span>:&nbsp;{{i.username}}</b>
+        <b><span style="color:blue">name</span>:&nbsp;{{i.name}}</b>
+        <b><span style="color:blue">email</span>:&nbsp;{{i.email}}</b>
+        <a href="#"class="btn btn-danger pull-right" id="c_f_conf1">Delete</a>
+    </div>
+    </div>
+    {% endfor %}
+    <ul class="pager">
+    {% if page > 1 %}
+      <li><a href="{{url_for('a_not_4u',tab='pro',page=page-1)}}">Previous</a></li>
+    {% endif %}
+    {% if MAX_PAGE > page %}
+      <li><a href="{{url_for('a_not_4u',tab='pro',page=page+1)}}">Next</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% endif %}
+{% if c_record %}
+    <div class="col-lg-3 col-lg-offset-1">
+    <div class="panel-heading">
+    <h2 class="panel-title "><center><b>Not Approved...</b></center></h2>
+    </div>
+    {% for i in c_record %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <span class="pan_hide">{{i.name}}<span class="pull-right">{{i.email}}</span><br></span>
+        <span class="panbody_hide"><h4>{{i.text}}<br></h4><a href="{{url_for('feed_comment_verify',cid=i.comment_id,actn=1,page=page,tab='c')}}" class="btn btn-success pull-left c_f_conf3">Apprroved</a>&nbsp;
+        <a href="{{url_for('feed_comment_verify',cid=i.comment_id,actn=0,page=page,tab='c')}}"class="btn btn-danger pull-right c_f_conf4" >Delete</a></span>
+    </div>
+    </div>
+    {% endfor %}
+    <ul class="pager">
+    {% if page > 1 %}
+      <li><a href="{{url_for('a_not_4u',tab='c',page=page-1)}}">Previous</a></li>
+    {% endif %}
+    {% if MAX_PAGE > page %}
+      <li><a href="{{url_for('a_not_4u',tab='c',page=page+1)}}">Next</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% endif %}
+{% if c1_record %}
+    <div class="col-lg-3 col-lg-offset-1">
+    <div class="panel-heading">
+    <h2 class="panel-title "><center><b>Approved...</b></center></h2>
+    </div>
+    {% for i in c1_record %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <span class="pan_hide">{{i.name}}<span class="pull-right">{{i.email}}</span><br></span>
+        <span class="panbody_hide"><h4>{{i.text}}<br></h4>&nbsp;
+        <a href="{{url_for('feed_comment_verify',cid=i.comment_id,actn=0,page=page,tab='c')}}"class="btn btn-danger pull-right c_f_conf4">Delete</a></span>
+    </div>
+    </div>
+    {% endfor %}
+    <ul class="pager">
+    {% if page > 1 %}
+      <li><a href="{{url_for('a_not_4u',tab='c',page=page-1)}}">Previous</a></li>
+    {% endif %}
+    {% if MAX_PAGE > page %}
+      <li><a href="{{url_for('a_not_4u',tab='c',page=page+1)}}">Next</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% endif %}
+{% if f_record %}
+    <div class="col-lg-3 col-lg-offset-1">
+    <div class="panel-heading">
+    <h2 class="panel-title "><center><b>Not Seen...</b></center></h2>
+    </div>
+    {% for i in f_record %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <span class="pan_hide">{{i.name}}<span class="pull-right">{{i.email}}</span><br></span>
+      <span class="panbody_hide"><h4>{{i.text}}<br></h4>
+      <a href="{{url_for('feed_comment_verify',cid=i.fed_id,actn=10,page=page,tab='f')}}"class="btn btn-danger pull-right c_f_conf2">Delete</a></span>
+    </div>
+    </div>
+    {% endfor %}
+    <ul class="pager">
+    {% if page > 1 %}
+      <li><a href="{{url_for('a_not_4u',tab='f',page=page-1)}}">Previous</a></li>
+    {% endif %}
+    {% if MAX_PAGE > page %}
+      <li><a href="{{url_for('a_not_4u',tab='f',page=page+1)}}">Next</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% endif %}
+</div>
+</div>
+<div class="modal fade" id="user_m_l" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h2 class="text-center "><b>Send Email</b></h2>
+        </div>
+        <div class="modal-body">
+          <!--<form class="form col-md-12 center-block">-->
+            <div class="form-group">
+            <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b> Email </b></span>
+                <input type="text" id="user_m_l_1"class="form-control input-lg"  placeholder="email id">
+            </div>
+               <center><span id="user_m_l_1s"></span></center>
+            </div>
+            <div class="form-group">
+            <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b> Subject </b></span>
+                <input type="text" id="user_m_l_2"class="form-control input-lg" placeholder="subject">
+            </div>
+               <center><span id="user_m_l_2s"></span></center>
+            </div>
+            <div class="form-group">
+            <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><b> Message </b></span>
+                <textarea type="text" id="user_m_l_3" class="form-control input-lg" rows="2" placeholder="Type your message...."></textarea>
+                </div>
+               <center><span id="user_m_l_3s"></span></center>
+            </div>
+
+            <div class="form-group">
+              <button id="user_m_l_sed"class="btn btn-primary btn-lg btn-block">Send </button>
+              <center><span id="user_m_l_seds"></span></center><br>
+               <center><span id=''></span></center>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-12">
+          <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+<!--
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+-->

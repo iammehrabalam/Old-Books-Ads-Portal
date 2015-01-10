@@ -1,0 +1,84 @@
+{% extends "model.html" %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+<div class="container">
+{% if g.user.e_conf == 0 %}
+<div class="row"id='prorecord'>
+<div class="ui-widget">
+	<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;margin-top:.4em;"></span>
+		<span style="color:red"><b><u>Please verify your email id </u></b> <br> a confirmation code is sent to your mail<small id="c_n_f_s">&nbsp;&nbsp;&nbsp;send agin</small></span> <span class="pull-right "id="c_n_f">enter code</span></p>
+	</div>
+</div>
+</div>
+{% endif %}
+<div class='row  centered'>
+	<div class="col-xs-8 col-sm-4 col-md-3 hidden-sm hidden-xs"id='proinfo'>
+		<div class="panel panel-info">
+  		<div class="panel-heading">
+    		<h3 ><center><strong>Your Info<br>(<span id="ck_code">{{g.user.username}}</span>)</strong></center></h3><!--class="panel-title "-->
+  		</div>
+  		<div class="panel-body">
+		    <p><span class="glyphicon glyphicon-user"> </span>   <b>{{g.user.name}}</b></p>
+		    <p><span class="glyphicon glyphicon-send"> </span>   <b>{{g.user.email}}</b></p>
+		    <!--a href="{{url_for('confirmation',v='set password',m=g.user.username)}}" class="pull-right">change password</a-->
+  		</div>
+		</div>
+		{% if g.user.e_conf != 0 %}
+		<!----><a href="{{url_for('uploadform')}}"  id='upid'><button class="btn btn-warning btn-lg btn-block" style="margin-top:3px" ><b>Submit Ads</b></button></a>
+		{% endif %}
+
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-3 hidden-lg hidden-md " id='prorecord'>
+		<div class="panel panel-info">
+  		<div class="panel-heading">
+    		<h3 ><center><strong>Your Info<br>({{g.user.username}})</strong></center></h3><!--class="panel-title "-->
+  		</div>
+  		<div class="panel-body">
+		    <p><span class="glyphicon glyphicon-user"> </span>   <b>{{g.user.name}}</b></p>
+		    <p><span class="glyphicon glyphicon-send"> </span>   <b>{{g.user.email}}</b></p>
+		    <!--a href="{{url_for('confirmation',v='set password',m=g.user.username)}}" class="pull-right">change password</a-->
+  		</div>
+		</div>
+		{% if g.user.e_conf != 0 %}
+		<!----><a href="{{url_for('uploadform')}}"  id='upid'><button class="btn btn-warning btn-lg btn-block" style="margin-top:3px"><b>Submit Ads</b></button></a>
+		{% endif %}
+	</div>
+	<div class="col-xs-12 col-md-offset-4 col-sm-offset-1 col-md-6 col-sm-6  responsive" id='prorecord'>
+		<!--<form>
+			<input type="text" name="title" placeholder="Title">
+			<input type="text" name="author" placeholder="Author">
+			<input type="file">
+			<input type="submit">
+		</form>-->
+
+		<div class="panel panel-danger">
+  		<div class="panel-heading">
+    		<h3 class="panel-title "><center>NOTE: <b>Please click on sold link after Sell or Rent of Ads</b></center></h3>
+  		</div>
+		</div>
+		<div class="panel panel-primary">
+  		<div class="panel-heading">
+    		<h3 class="panel-title "><center><b>Your Posts.....</b></center></h3>
+  		</div>
+		</div>
+		<ul class="list-group">
+		{% if record %}
+		{% for i in record %}
+ 		{% if i.status==0 %}
+ 		<li class="list-group-item">
+        <span class="label label-default pull-right">{{i.datetime}}</span>
+        <b><span style="color:green">title&nbsp; :&nbsp;&nbsp;</span>{{i.title}}<br>
+        <span style="color:green">author</span> : {{i.author}}<br>
+        <span style="color:green">publisher</span> : {{i.pub}}<b>
+        <a href="{{url_for('sold',id=i.post_id)}}" class="pull-right">Sold</a></li>
+    {% endif %}
+  		{% endfor %}
+  		{% endif %}
+		</ul>
+
+	</div>
+</div>
+</div>
+
+{% endblock %}

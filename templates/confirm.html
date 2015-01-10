@@ -1,0 +1,36 @@
+{% extends "model.html" %}
+{% block body %}
+<div id="prorecord" class="container">
+<span id="hid" display="hidden"></span>
+<br><br>
+{% if v=='verify user'%}
+<div class="col-lg-4">
+	<h3><u><em><b>Verify Your Information</b></em></u></h3>
+	<form >
+		<input type="text" class="form-control"placeholder="Username" id="c_p_0" autofocus required><br>
+		<center><span id="c_p_0s"></span></center>
+		<input type="text" class="form-control"placeholder="Email id" id="c_p_1"><br>
+		<center><span id="c_p_1s"></span></center>
+		<input type="text" class="form-control"placeholder="Full name" id="c_p_2"><br>
+		<center><span id="c_p_2s"></span></center>
+		<button class="btn btn-success pull-right" id="c_p_btn1" ><b>Next</b></button>
+		<center><span id="c_p_btn1s"></span></center>
+	</form>
+</div>
+{% endif %}
+{% if v=='set password'%}
+<div class="col-lg-4">
+	<h3><u><em><b>Set Password</b></em></u></h3>
+	<form>
+		<span id="hiddd" style="display:none">{{m}}</span>
+		<input type="password" class="form-control"placeholder="Password" id="c_p_3" autofocus required><br>
+		<center><span id="c_p_3s"></span></center>
+		<input type="password" class="form-control"placeholder="Confirm password" id="c_p_4"><br>
+		<center><span id="c_p_4s"></span></center>
+		<button class="btn btn-success pull-right" id="c_p_btn2" ><b>Submit</b></button>
+		<center><span id="c_p_btn2s"></span></center>
+	</form>
+</div>
+{% endif %}
+</div>
+{% endblock %}

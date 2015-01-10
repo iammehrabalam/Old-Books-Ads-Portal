@@ -1,0 +1,25 @@
+{% extends "model.html" %}
+{% block title %}Comments{% endblock %}
+{% block body %}
+<div class="container" id="prorecord">
+<center><h1><u>Comments</u></h1></center>
+{% if record %}
+    {% for i in record %}
+    <span class="ev_od">
+    <span class="list-group-item ">
+    <span class="label label-danger"style="font-size:1em">{{i.name}}</span><br>
+    <span class="input-lg">{{i.text}}</span>
+    </span>
+    </span>
+    {% endfor %}
+<ul class="pager ">
+{% if page > 1 %}
+  <li><a href="{{url_for('comments',page=page-1)}}"><b>Previous</b></a></li>
+{% endif %}
+{% if MAX_PAGE > page %}
+  <li><a href="{{url_for('comments',page=page+1)}}"><b>Next</b></a></li>
+{% endif %}
+</ul>
+{% endif %}
+</div>
+{% endblock %}
